@@ -1,0 +1,51 @@
+#include <stdio.h>
+#define dim 100
+
+int main()
+{
+FILE *f,*g;
+int i=0,v[dim],n,j,temp;
+char c,nomfich[30];
+
+printf(“Dirección del fichero: ”);
+scanf(“%s”,nomfich);
+printf(“Número de componentes del fichero: ”);
+scanf(“%d”,&n);
+
+f=fopen(nomfich,”r+”);
+if(f==NULL)printf(“Error”);
+else
+{
+fscanf(f,”%d”,&v[i]);
+i++;
+while(!feof(f)){
+fscanf(f,”%d%c”,&v[i]);
+i++;
+}
+for(i=0;i<n;i++)
+printf(“%d\t”,v[i]);
+}
+
+for(i=0; i<(n-1); i++)
+{
+for (j=i+1; j<n; j++)
+{
+if(v[j]<v[i])
+{
+temp=v[j];
+v[j]=v[i];
+v[i]=temp;
+}
+}
+}
+g=fopen(“primero_ordenado.txt”,”w”);
+fprintf(g,”El fichero ordenado es:\n”);
+
+for(i=0; i<n ; i++)
+{
+fprintf(g,”%d “,v[i]);
+}
+fprintf(g,”\n”);
+
+return 0;
+}
